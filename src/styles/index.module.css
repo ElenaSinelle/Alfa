@@ -74,6 +74,39 @@ a {
   }
 }
 
+.button_delete {
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  outline: none;
+  border: none;
+  background-color: rgb(245, 188, 227);
+  color: rgba(0, 0, 0, 0.855);
+  width: 8rem;
+  font-size: 1rem;
+  font-weight: bolder;
+  text-decoration: none;
+  text-align: center;
+  transition: all ease 0.5s;
+  cursor: pointer;
+}
+.button_delete:hover, .button_delete:active {
+  background-color: rgba(245, 188, 227, 0.6);
+  transform: scale(1.02);
+}
+@media all and (max-width: 1150px) {
+  .button_delete {
+    width: 12rem;
+    font-size: 1rem;
+  }
+}
+@media all and (max-width: 760px) {
+  .button_delete {
+    width: 8rem;
+    font-size: 0.9rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
 .notFound {
   height: 100%;
   display: flex;

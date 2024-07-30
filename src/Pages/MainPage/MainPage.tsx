@@ -1,10 +1,28 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { RootState, AppDispatch } from "../../types";
 import styles from "../../styles/index.module.scss";
 import { useGetCardsQuery } from "../../services/cardsApi";
+import {
+  setCards,
+  setCardsSelector,
+} from "../../store/cardsSlice";
+// import { CardsData } from "../../types";
+import { useEffect } from "react";
 
 const MainPage: React.FC = () => {
-  const { data, error, isLoading } =
-    useGetCardsQuery("categories");
+  const dispatch = useDispatch();
+
+  const { data, error, isLoading } = useGetCardsQuery();
+
+  const cards = useSelector(setCardsSelector);
+
+  useEffect(() => {
+    if (data && data.categories) {
+      dispatch(setCards(data.categories));
+    }
+  }, [data, dispatch]);
+
+  // const handleDelete = id: string => {};
 
   return (
     <div
@@ -13,7 +31,7 @@ const MainPage: React.FC = () => {
       <h1
         className={`${styles.main__title} ${styles.theme}`}
       >
-        Recipes
+        Dish Categories
       </h1>
       <button className={styles.button}>Show Liked</button>
       {/* <ShowLiked /> */}
@@ -21,11 +39,9 @@ const MainPage: React.FC = () => {
         <p>Loading details...</p>
       ) : error ? (
         <p>Error loading details</p>
-      ) : data &&
-        data.categories &&
-        data.categories.length ? (
+      ) : cards ? (
         <div className={styles.main__blocks}>
-          {data.categories.map(item => (
+          {cards.map(item => (
             <div key={item.idCategory}>
               <div>Id: {item.idCategory}</div>
               <div>Category: {item.strCategory}</div>
@@ -38,9 +54,18 @@ const MainPage: React.FC = () => {
               <div>
                 Description: {item.strCategoryDescription}
               </div>
-              <button className={styles.button}>
-                Delete
-              </button>
+              <div className={styles.item__btns}>
+                <input type="checkbox" />
+                Like
+                <button
+                  className={styles.button_delete}
+                  // onClick={() =>
+                  //   handleDelete(item.idCategory)
+                  // }
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>

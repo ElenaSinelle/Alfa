@@ -12,9 +12,9 @@ export const cardsApi = createApi({
   endpoints: builder => ({
     getCards: builder.query<
       { categories: CardsData[] },
-      string
+      void
     >({
-      query: type => `json/v1/1/${type}.php`,
+      query: () => "json/v1/1/categories.php",
     }),
   }),
 });

@@ -35,6 +35,9 @@ a {
   @include button;
 }
 
+.button_delete {
+  @include button_delete;
+}
 //notFoundPage styles
 .notFound {
   @include flexAlignmentColumn;

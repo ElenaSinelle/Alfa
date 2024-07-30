@@ -56,3 +56,35 @@
     padding: 0.4rem 1rem;
   }
 }
+
+@mixin button_delete {
+  padding: 0.5rem 1rem;
+  border-radius: $borderRadius;
+  outline: none;
+  border: none;
+  background-color: $button-light;
+  color: $fontColor-light;
+  width: 8rem;
+  font-size: 1rem;
+  font-weight: bolder;
+  text-decoration: none;
+  text-align: center;
+  transition: $transition;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    @include onHover(0.6);
+  }
+
+  @media all and (max-width: 1150px) {
+    width: 12rem;
+    font-size: 1rem;
+  }
+
+  @media all and (max-width: 760px) {
+    width: 8rem;
+    font-size: 0.9rem;
+    padding: 0.4rem 1rem;
+  }
+}
