@@ -9,10 +9,7 @@ const Header: React.FC = () => {
       <Logo />
       <div className={styles.header__btns}>
         <SwitchMode />
-        <Link
-          to="contacts"
-          className={`${styles.button} ${styles.theme}`}
-        >
+        <Link to="contacts" className={`${styles.button} ${styles.theme}`}>
           Contacts
         </Link>
       </div>

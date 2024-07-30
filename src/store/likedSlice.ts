@@ -1,7 +1,4 @@
-import {
-  createSlice,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../types";
 
 const initialState: string[] = [];
@@ -21,10 +18,7 @@ const likedSlice = createSlice({
     unlikeAll: () => {
       return [];
     },
-    deleteLikedCard: (
-      state,
-      action: PayloadAction<string>,
-    ) => {
+    deleteLikedCard: (state, action: PayloadAction<string>) => {
       return state.filter(id => id !== action.payload);
     },
   },
@@ -32,12 +26,7 @@ const likedSlice = createSlice({
 
 export const likedReducer = likedSlice.reducer;
 
-export const {
-  likeCard,
-  unlikeCard,
-  unlikeAll,
-  deleteLikedCard,
-} = likedSlice.actions;
+export const { likeCard, unlikeCard, unlikeAll, deleteLikedCard } =
+  likedSlice.actions;
 
-export const selectLikedCards = (state: RootState) =>
-  state.liked;
+export const selectLikedCards = (state: RootState) => state.liked;

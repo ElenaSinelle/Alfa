@@ -32,6 +32,12 @@ html {
   padding-right: 5rem;
   padding-left: 5rem;
 }
+@media all and (max-width: 550px) {
+  .wrapper {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
 
 .content {
   padding: 1rem 2rem;
@@ -42,9 +48,10 @@ a {
 }
 
 .button {
-  padding: 0.5rem 1.5rem;
   border-radius: 0.3rem;
   outline: none;
+  border: 1px solid rgb(96, 189, 221);
+  padding: 0.5rem 1.5rem;
   border: none;
   background-color: rgb(245, 188, 227);
   color: rgba(0, 0, 0, 0.855);
@@ -58,15 +65,14 @@ a {
 }
 .button:hover, .button:active {
   background-color: rgba(245, 188, 227, 0.6);
-  transform: scale(1.02);
 }
-@media all and (max-width: 1150px) {
+@media all and (max-width: 950px) {
   .button {
     width: 12rem;
     font-size: 1rem;
   }
 }
-@media all and (max-width: 760px) {
+@media all and (max-width: 550px) {
   .button {
     width: 8rem;
     font-size: 0.9rem;
@@ -75,36 +81,23 @@ a {
 }
 
 .button_delete {
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
-  outline: none;
+  background: none;
   border: none;
-  background-color: rgb(245, 188, 227);
-  color: rgba(0, 0, 0, 0.855);
-  width: 8rem;
-  font-size: 1rem;
-  font-weight: bolder;
-  text-decoration: none;
-  text-align: center;
-  transition: all ease 0.5s;
   cursor: pointer;
+  transition: all ease 0.5s;
 }
-.button_delete:hover, .button_delete:active {
-  background-color: rgba(245, 188, 227, 0.6);
-  transform: scale(1.02);
+.button_delete:hover {
+  transform: scale(1.5);
 }
-@media all and (max-width: 1150px) {
-  .button_delete {
-    width: 12rem;
-    font-size: 1rem;
-  }
+
+.button_like {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all ease 0.5s;
 }
-@media all and (max-width: 760px) {
-  .button_delete {
-    width: 8rem;
-    font-size: 0.9rem;
-    padding: 0.4rem 1rem;
-  }
+.button_like:hover {
+  transform: scale(1.5);
 }
 
 .notFound {
@@ -156,12 +149,12 @@ a {
   justify-content: center;
   gap: 1rem;
 }
-@media all and (max-width: 760px) {
+@media all and (max-width: 950px) {
   .header__btns {
     gap: 0.5rem;
   }
 }
-@media all and (max-width: 1150px) {
+@media all and (max-width: 1320px) {
   .header__btns {
     flex-direction: column;
     gap: 0.6rem;
@@ -174,7 +167,7 @@ a {
   justify-content: center;
   gap: 1rem;
 }
-@media all and (max-width: 760px) {
+@media all and (max-width: 950px) {
   .logo {
     gap: 0.5rem;
   }
@@ -183,7 +176,7 @@ a {
   font-size: 1.3rem;
   font-weight: bolder;
 }
-@media all and (max-width: 760px) {
+@media all and (max-width: 950px) {
   .logo p {
     font-size: 1rem;
   }
@@ -206,10 +199,16 @@ a {
   font-size: 2rem;
   font-weight: bolder;
 }
-@media all and (max-width: 760px) {
+@media all and (max-width: 950px) {
   .main__title {
     font-size: 1.5rem;
   }
+}
+.main__btns {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .main__blocks {
   display: grid;
@@ -217,13 +216,42 @@ a {
   grid-auto-rows: max-content;
   gap: 1rem;
 }
-@media all and (max-width: 1150px) {
+@media all and (max-width: 1320px) {
   .main__blocks {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media all and (max-width: 760px) {
+@media all and (max-width: 950px) {
   .main__blocks {
     grid-template-columns: 1fr;
   }
+}
+
+.card {
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  border-radius: 0.3rem;
+  outline: none;
+  border: 1px solid rgb(96, 189, 221);
+}
+@media all and (max-width: 950px) {
+  .card__img {
+    width: 18rem;
+  }
+}
+@media all and (max-width: 550px) {
+  .card__img {
+    width: 12rem;
+  }
+}
+.card__btns {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

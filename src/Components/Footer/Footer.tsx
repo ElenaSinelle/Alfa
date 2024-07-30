@@ -4,15 +4,10 @@ import Logo from "../Logo/Logo";
 
 const Footer = () => {
   return (
-    <footer
-      className={`${styles.content} ${styles.footer} ${styles.theme}`}
-    >
+    <footer className={`${styles.content} ${styles.footer} ${styles.theme}`}>
       <Logo />
 
-      <Link
-        to="/contacts"
-        className={`${styles.button} ${styles.theme}`}
-      >
+      <Link to="/contacts" className={`${styles.button} ${styles.theme}`}>
         Contacts
       </Link>
     </footer>

@@ -1,35 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
-import {
-  RootState,
-  AppDispatch,
-  CardData,
-} from "../../types";
+import { RootState, AppDispatch, CardData } from "../../types";
 import { useGetCardsQuery } from "../../services/cardsApi";
-import {
-  setCards,
-  selectCards,
-} from "../../store/cardsSlice";
-import {
-  selectLikedCards,
-  unlikeAll,
-} from "../../store/likedSlice";
+import { setCards, selectCards } from "../../store/cardsSlice";
+import { selectLikedCards, unlikeAll } from "../../store/likedSlice";
 import Card from "../../Components/Card/Card";
 import ShowLiked from "../../Components/ShowLiked/ShowLiked";
 import styles from "../../styles/index.module.scss";
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { data, error, isLoading, refetch } =
-    useGetCardsQuery();
+  const { data, error, isLoading, refetch } = useGetCardsQuery();
   const [showLiked, setShowLiked] = useState(false);
 
-  const cards = useSelector<RootState, CardData[]>(
-    selectCards,
-  );
-  const likedCards = useSelector<RootState, string[]>(
-    selectLikedCards,
-  );
+  const cards = useSelector<RootState, CardData[]>(selectCards);
+  const likedCards = useSelector<RootState, string[]>(selectLikedCards);
 
   useEffect(() => {
     if (data && data.categories.length > 0) {
@@ -50,9 +35,7 @@ const MainPage: React.FC = () => {
 
   const filteredCards = useMemo(() => {
     return showLiked
-      ? cards.filter(card =>
-          likedCards.includes(card.idCategory),
-        )
+      ? cards.filter(card => likedCards.includes(card.idCategory))
       : cards;
   }, [showLiked, cards, likedCards]);
 
@@ -61,24 +44,14 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <div
-      className={`${styles.content} ${styles.main} ${styles.theme}`}
-    >
-      <h1
-        className={`${styles.main__title} ${styles.theme}`}
-      >
+    <div className={`${styles.content} ${styles.main} ${styles.theme}`}>
+      <h1 className={`${styles.main__title} ${styles.theme}`}>
         Dish Categories
       </h1>
 
-      <div>
-        <ShowLiked
-          showLiked={showLiked}
-          handleShowLiked={handleShowLiked}
-        />
-        <button
-          className={styles.button}
-          onClick={resetList}
-        >
+      <div className={styles.main__btns}>
+        <ShowLiked showLiked={showLiked} handleShowLiked={handleShowLiked} />
+        <button className={styles.button} onClick={resetList}>
           Reset List
         </button>
       </div>

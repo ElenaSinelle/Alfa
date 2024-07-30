@@ -11,8 +11,9 @@ $button-light: rgb(245, 188, 227);
 $button-dark: rgb(103, 64, 90);
 
 $transition: all ease 0.5s;
-$transformScale: scale(0.97);
 
 $borderRadius: 0.3rem;
 
-$box-shadow: 0 2px 5px #919191;
+$large-screen: 1320px;
+$medium-screen: 950px;
+$small-screen: 550px;

@@ -3,9 +3,7 @@ import styles from "../../styles/index.module.scss";
 
 const ContactsPage: React.FC = () => {
   return (
-    <div
-      className={`${styles.container} ${styles.contacts}`}
-    >
+    <div className={`${styles.container} ${styles.contacts}`}>
       <h3 className={styles.contacts__title}>
         Visit my{" "}
         <a

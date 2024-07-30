@@ -7,6 +7,7 @@ import {
   deleteLikedCard,
 } from "../../store/likedSlice";
 import { CardProps, RootState } from "../../types";
+import { FaTimes, FaRegHeart, FaHeart } from "react-icons/fa";
 import styles from "../../styles/index.module.scss";
 
 const Card: React.FC<CardProps> = ({
@@ -16,10 +17,8 @@ const Card: React.FC<CardProps> = ({
   strCategoryDescription,
 }) => {
   const dispatch = useDispatch();
-  const likedCards = useSelector((state: RootState) =>
-    selectLikedCards(state),
-  );
-  const isChecked = likedCards.includes(idCategory);
+  const likedCards = useSelector((state: RootState) => selectLikedCards(state));
+  const isLiked = likedCards.includes(idCategory);
 
   const handleDelete = (id: string) => {
     dispatch(deleteCard(id));
@@ -27,7 +26,7 @@ const Card: React.FC<CardProps> = ({
   };
 
   const handleLike = (id: string) => {
-    if (isChecked) {
+    if (isLiked) {
       dispatch(unlikeCard(id));
     } else {
       dispatch(likeCard(id));
@@ -37,22 +36,27 @@ const Card: React.FC<CardProps> = ({
   return (
     <div className={styles.card}>
       <div>Dish Category: {strCategory}</div>
-      <div className={styles.card__img}>
-        <img src={strCategoryThumb} alt={strCategory} />
-      </div>
-      <div>Description: {strCategoryDescription}</div>
-      <div className={styles.item__btns}>
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={() => handleLike(idCategory)}
+      <div>
+        <img
+          className={styles.card__img}
+          src={strCategoryThumb}
+          alt={strCategory}
         />
-        Like
+      </div>
+      <div>Description: {strCategoryDescription.slice(0, 120)}...</div>
+      <div className={styles.card__btns}>
+        <button
+          onClick={() => handleLike(idCategory)}
+          className={styles.button_like}
+        >
+          {isLiked ? <FaHeart /> : <FaRegHeart />}
+        </button>
+
         <button
           className={styles.button_delete}
           onClick={() => handleDelete(idCategory)}
         >
-          Delete
+          <FaTimes />
         </button>
       </div>
     </div>

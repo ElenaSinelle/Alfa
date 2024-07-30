@@ -14,21 +14,31 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  @media all and (max-width: 760px) {
+  @media all and (max-width: $medium-screen) {
     gap: 0.5rem;
   }
 }
 
+@mixin stretchAlignment {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin borderRounded {
+  border-radius: $borderRadius;
+  outline: none;
+  border: 1px solid $bgColor-light;
+}
+
 @mixin onHover($a) {
   background-color: rgba($button-light, $a);
-
-  transform: scale(1.02);
 }
 
 @mixin button {
+  @include borderRounded;
   padding: 0.5rem 1.5rem;
-  border-radius: $borderRadius;
-  outline: none;
   border: none;
   background-color: $button-light;
   color: $fontColor-light;
@@ -45,44 +55,12 @@
     @include onHover(0.6);
   }
 
-  @media all and (max-width: 1150px) {
+  @media all and (max-width: $medium-screen) {
     width: 12rem;
     font-size: 1rem;
   }
 
-  @media all and (max-width: 760px) {
-    width: 8rem;
-    font-size: 0.9rem;
-    padding: 0.4rem 1rem;
-  }
-}
-
-@mixin button_delete {
-  padding: 0.5rem 1rem;
-  border-radius: $borderRadius;
-  outline: none;
-  border: none;
-  background-color: $button-light;
-  color: $fontColor-light;
-  width: 8rem;
-  font-size: 1rem;
-  font-weight: bolder;
-  text-decoration: none;
-  text-align: center;
-  transition: $transition;
-  cursor: pointer;
-
-  &:hover,
-  &:active {
-    @include onHover(0.6);
-  }
-
-  @media all and (max-width: 1150px) {
-    width: 12rem;
-    font-size: 1rem;
-  }
-
-  @media all and (max-width: 760px) {
+  @media all and (max-width: $small-screen) {
     width: 8rem;
     font-size: 0.9rem;
     padding: 0.4rem 1rem;

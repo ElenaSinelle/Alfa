@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import MainPage from "./Pages/MainPage/MainPage";
 import ContactsPage from "./Pages/ContactsPage/ContactsPage";
@@ -14,10 +10,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
-          <Route
-            path="contacts"
-            element={<ContactsPage />}
-          />
+          <Route path="contacts" element={<ContactsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

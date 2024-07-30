@@ -5,9 +5,7 @@ const NotFoundPage: React.FC = () => {
   return (
     <div className={`${styles.content} ${styles.notFound}`}>
       <h2 className={styles.notFound__404}>404</h2>
-      <p className={styles.notFound__title}>
-        This page does not exist
-      </p>
+      <p className={styles.notFound__title}>This page does not exist</p>
 
       <Link className={styles.button} to="/">
         {" "}
