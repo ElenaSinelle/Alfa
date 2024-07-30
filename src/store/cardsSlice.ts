@@ -3,10 +3,13 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { CardData, RootState } from "../types";
+import { deleteLikedCard } from "./likedSlice";
 
-export const cardsSlice = createSlice({
+const initialState: CardData[] = [];
+
+const cardsSlice = createSlice({
   name: "cards",
-  initialState: [] as CardData[],
+  initialState,
   reducers: {
     setCards: (_, action: PayloadAction<CardData[]>) => {
       return action.payload;
@@ -17,9 +20,21 @@ export const cardsSlice = createSlice({
       );
     },
   },
+  extraReducers: builder => {
+    builder.addCase(
+      deleteLikedCard,
+      (state, action: PayloadAction<string>) => {
+        return state.filter(
+          card => card.idCategory !== action.payload,
+        );
+      },
+    );
+  },
 });
 
-export const setCardsSelector = (state: RootState) =>
-  state.cards;
+export const cardsReducer = cardsSlice.reducer;
 
 export const { setCards, deleteCard } = cardsSlice.actions;
+
+export const selectCards = (state: RootState) =>
+  state.cards;

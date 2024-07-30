@@ -1,7 +1,13 @@
-import styles from "../../styles/index.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteCard } from "../../store/cardsSlice";
-import { useDispatch } from "react-redux";
-import { CardProps } from "../../types";
+import {
+  likeCard,
+  unlikeCard,
+  selectLikedCards,
+  deleteLikedCard,
+} from "../../store/likedSlice";
+import { CardProps, RootState } from "../../types";
+import styles from "../../styles/index.module.scss";
 
 const Card: React.FC<CardProps> = ({
   idCategory,
@@ -10,9 +16,22 @@ const Card: React.FC<CardProps> = ({
   strCategoryDescription,
 }) => {
   const dispatch = useDispatch();
+  const likedCards = useSelector((state: RootState) =>
+    selectLikedCards(state),
+  );
+  const isChecked = likedCards.includes(idCategory);
 
   const handleDelete = (id: string) => {
     dispatch(deleteCard(id));
+    dispatch(deleteLikedCard(id));
+  };
+
+  const handleLike = (id: string) => {
+    if (isChecked) {
+      dispatch(unlikeCard(id));
+    } else {
+      dispatch(likeCard(id));
+    }
   };
 
   return (
@@ -23,7 +42,11 @@ const Card: React.FC<CardProps> = ({
       </div>
       <div>Description: {strCategoryDescription}</div>
       <div className={styles.item__btns}>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={() => handleLike(idCategory)}
+        />
         Like
         <button
           className={styles.button_delete}

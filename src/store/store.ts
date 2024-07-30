@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { cardsApi } from "../services/cardsApi";
-import { cardsSlice } from "./cardsSlice";
+import { cardsReducer } from "./cardsSlice";
+import { likedReducer } from "./likedSlice";
 
 const store = configureStore({
   reducer: {
     [cardsApi.reducerPath]: cardsApi.reducer,
-    cards: cardsSlice.reducer,
+    cards: cardsReducer,
+    liked: likedReducer,
   },
   devTools: true,
   middleware: getDefaultMiddleware =>

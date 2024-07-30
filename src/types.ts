@@ -16,3 +16,8 @@ export interface CardProps {
   strCategoryThumb: string;
   strCategoryDescription: string;
 }
+
+export interface ShowLikedProps {
+  showLiked: boolean;
+  handleShowLiked: () => void;
+}

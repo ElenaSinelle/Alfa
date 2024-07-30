@@ -1,44 +1,63 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 import {
   RootState,
   AppDispatch,
   CardData,
 } from "../../types";
-import styles from "../../styles/index.module.scss";
 import { useGetCardsQuery } from "../../services/cardsApi";
 import {
   setCards,
-  setCardsSelector,
+  selectCards,
 } from "../../store/cardsSlice";
-import { useEffect, useCallback } from "react";
+import {
+  selectLikedCards,
+  unlikeAll,
+} from "../../store/likedSlice";
 import Card from "../../Components/Card/Card";
+import ShowLiked from "../../Components/ShowLiked/ShowLiked";
+import styles from "../../styles/index.module.scss";
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { data, error, isLoading } = useGetCardsQuery();
+  const { data, error, isLoading, refetch } =
+    useGetCardsQuery();
+  const [showLiked, setShowLiked] = useState(false);
 
   const cards = useSelector<RootState, CardData[]>(
-    setCardsSelector,
+    selectCards,
   );
-
-  const uploadData = useCallback(
-    (data?: { categories: CardData[] }) => {
-      if (data && data.categories.length > 0) {
-        dispatch(setCards(data.categories));
-      } else {
-        dispatch(setCards([]));
-      }
-    },
-    [dispatch],
+  const likedCards = useSelector<RootState, string[]>(
+    selectLikedCards,
   );
 
   useEffect(() => {
-    uploadData(data);
-  }, [data, uploadData]);
+    if (data && data.categories.length > 0) {
+      dispatch(setCards(data.categories));
+    } else {
+      dispatch(setCards([]));
+    }
+  }, [data, dispatch]);
 
-  const refreshList = () => {
-    uploadData(data);
+  const resetList = () => {
+    setShowLiked(false);
+    dispatch(unlikeAll());
+    refetch();
+    if (data && data.categories.length > 0) {
+      dispatch(setCards(data.categories));
+    }
+  };
+
+  const filteredCards = useMemo(() => {
+    return showLiked
+      ? cards.filter(card =>
+          likedCards.includes(card.idCategory),
+        )
+      : cards;
+  }, [showLiked, cards, likedCards]);
+
+  const handleShowLiked = () => {
+    setShowLiked(showLiked => !showLiked);
   };
 
   return (
@@ -52,15 +71,15 @@ const MainPage: React.FC = () => {
       </h1>
 
       <div>
-        <button className={styles.button}>
-          Show Liked
-        </button>
-        {/* <ShowLiked /> */}
+        <ShowLiked
+          showLiked={showLiked}
+          handleShowLiked={handleShowLiked}
+        />
         <button
           className={styles.button}
-          onClick={refreshList}
+          onClick={resetList}
         >
-          Refresh List
+          Reset List
         </button>
       </div>
 
@@ -70,7 +89,7 @@ const MainPage: React.FC = () => {
         <p>Error loading details</p>
       ) : cards ? (
         <div className={styles.main__blocks}>
-          {cards.map(card => (
+          {filteredCards.map(card => (
             <Card key={card.idCategory} {...card} />
           ))}
         </div>
