@@ -1,28 +1,45 @@
 import { useDispatch, useSelector } from "react-redux";
-// import { RootState, AppDispatch } from "../../types";
+import {
+  RootState,
+  AppDispatch,
+  CardData,
+} from "../../types";
 import styles from "../../styles/index.module.scss";
 import { useGetCardsQuery } from "../../services/cardsApi";
 import {
   setCards,
   setCardsSelector,
 } from "../../store/cardsSlice";
-// import { CardsData } from "../../types";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
+import Card from "../../Components/Card/Card";
 
 const MainPage: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { data, error, isLoading } = useGetCardsQuery();
 
-  const cards = useSelector(setCardsSelector);
+  const cards = useSelector<RootState, CardData[]>(
+    setCardsSelector,
+  );
+
+  const uploadData = useCallback(
+    (data?: { categories: CardData[] }) => {
+      if (data && data.categories.length > 0) {
+        dispatch(setCards(data.categories));
+      } else {
+        dispatch(setCards([]));
+      }
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
-    if (data && data.categories) {
-      dispatch(setCards(data.categories));
-    }
-  }, [data, dispatch]);
+    uploadData(data);
+  }, [data, uploadData]);
 
-  // const handleDelete = id: string => {};
+  const refreshList = () => {
+    uploadData(data);
+  };
 
   return (
     <div
@@ -33,40 +50,28 @@ const MainPage: React.FC = () => {
       >
         Dish Categories
       </h1>
-      <button className={styles.button}>Show Liked</button>
-      {/* <ShowLiked /> */}
+
+      <div>
+        <button className={styles.button}>
+          Show Liked
+        </button>
+        {/* <ShowLiked /> */}
+        <button
+          className={styles.button}
+          onClick={refreshList}
+        >
+          Refresh List
+        </button>
+      </div>
+
       {isLoading ? (
-        <p>Loading details...</p>
+        <p>Loading dish categories...</p>
       ) : error ? (
         <p>Error loading details</p>
       ) : cards ? (
         <div className={styles.main__blocks}>
-          {cards.map(item => (
-            <div key={item.idCategory}>
-              <div>Id: {item.idCategory}</div>
-              <div>Category: {item.strCategory}</div>
-              <div>
-                <img
-                  src={item.strCategoryThumb}
-                  alt={item.strCategory}
-                />
-              </div>
-              <div>
-                Description: {item.strCategoryDescription}
-              </div>
-              <div className={styles.item__btns}>
-                <input type="checkbox" />
-                Like
-                <button
-                  className={styles.button_delete}
-                  // onClick={() =>
-                  //   handleDelete(item.idCategory)
-                  // }
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
+          {cards.map(card => (
+            <Card key={card.idCategory} {...card} />
           ))}
         </div>
       ) : (

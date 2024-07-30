@@ -2,13 +2,13 @@ import {
   createSlice,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { CardsData, RootState } from "../types";
+import { CardData, RootState } from "../types";
 
 export const cardsSlice = createSlice({
   name: "cards",
-  initialState: [] as CardsData[],
+  initialState: [] as CardData[],
   reducers: {
-    setCards: (_, action: PayloadAction<CardsData[]>) => {
+    setCards: (_, action: PayloadAction<CardData[]>) => {
       return action.payload;
     },
     deleteCard: (state, action: PayloadAction<string>) => {
