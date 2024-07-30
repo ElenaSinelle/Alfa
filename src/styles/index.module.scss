@@ -38,6 +38,23 @@ a {
 // buttons styles
 .button {
   @include button;
+  &.light {
+    background-color: $button-light;
+    color: $fontColor-light;
+    &:hover,
+    &:active {
+      @include onHover($button-light, 0.6);
+    }
+  }
+
+  &.dark {
+    background-color: $button-dark;
+    color: $fontColor-dark;
+    &:hover,
+    &:active {
+      @include onHover($button-dark, 0.3);
+    }
+  }
 }
 
 .button_delete {
@@ -63,8 +80,12 @@ a {
 //notFoundPage styles
 .notFound {
   @include flexAlignmentColumn;
-  background-color: $bgColor-main-light;
-
+  &.light {
+    background-color: $bgColor-main-light;
+  }
+  &.dark {
+    background-color: $bgColor-main-dark;
+  }
   &__404 {
     font-size: 4rem;
     font-weight: bolder;
@@ -72,21 +93,46 @@ a {
   &__title {
     font-size: 1.5rem;
   }
+  &__404,
+  &__title {
+    &.light {
+      color: $fontColor-light;
+    }
+    &.dark {
+      color: $fontColor-dark;
+    }
+  }
 }
 
 //contacts page styles
 .contacts {
   @include flexAlignmentColumn;
-  background-color: $bgColor-main-light;
-
+  &.light {
+    background-color: $bgColor-main-light;
+  }
+  &.dark {
+    background-color: $bgColor-main-dark;
+  }
   &__title {
     font-size: 1.5rem;
+    &.light {
+      color: $fontColor-light;
+    }
+    &.dark {
+      color: $fontColor-dark;
+    }
   }
 
   &__link {
     font-size: 1.6rem;
     font-weight: 700;
     cursor: pointer;
+    &.light {
+      color: $button-dark;
+    }
+    &.dark {
+      color: $button-light;
+    }
   }
 }
 
@@ -96,13 +142,17 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: $bgColor-light;
+  &.light {
+    background-color: $bgColor-light;
+  }
+  &.dark {
+    background-color: $bgColor-dark;
+  }
 }
 
 .header {
   &__btns {
     @include flexAlignmentRow;
-
     @media all and (max-width: $large-screen) {
       flex-direction: column;
       gap: 0.6rem;
@@ -112,12 +162,17 @@ a {
 
 .logo {
   @include flexAlignmentRow;
-
-  & p {
+  &__title {
     font-size: 1.3rem;
     font-weight: bolder;
     @media all and (max-width: $medium-screen) {
       font-size: 1rem;
+    }
+    &.light {
+      color: $fontColor-light;
+    }
+    &.dark {
+      color: $fontColor-dark;
     }
   }
 
@@ -134,13 +189,24 @@ a {
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
-  background-color: $bgColor-main-light;
+  &.light {
+    background-color: $bgColor-main-light;
+  }
+  &.dark {
+    background-color: $bgColor-main-dark;
+  }
   &__title {
     text-align: center;
     font-size: 2rem;
     font-weight: bolder;
     @media all and (max-width: $medium-screen) {
       font-size: 1.5rem;
+    }
+    &.light {
+      color: $fontColor-light;
+    }
+    &.dark {
+      color: $fontColor-dark;
     }
   }
   &__btns {
@@ -175,5 +241,13 @@ a {
   }
   &__btns {
     @include stretchAlignment;
+  }
+  &__text {
+    &.light {
+      color: $fontColor-light;
+    }
+    &.dark {
+      color: $fontColor-dark;
+    }
   }
 }

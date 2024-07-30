@@ -1,7 +1,10 @@
 @font-face {
   font-family: "Lato";
   src: url("../fonts/Lato-Light.ttf");
-  src: url("../fonts/Lato-Light.eot") format("embedded-opentype"), url("../fonts/Lato-Light.woff2") format("woff2"), url("../fonts/Lato-Light.woff") format("woff");
+  src:
+    url("../fonts/Lato-Light.eot") format("embedded-opentype"),
+    url("../fonts/Lato-Light.woff2") format("woff2"),
+    url("../fonts/Lato-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -9,7 +12,10 @@
 @font-face {
   font-family: "Lato";
   src: url("../fonts/Lato-Regular.ttf");
-  src: url("../fonts/Lato-Regular.eot") format("embedded-opentype"), url("../fonts/Lato-Regular.woff2") format("woff2"), url("../fonts/Lato-Regular.woff") format("woff");
+  src:
+    url("../fonts/Lato-Regular.eot") format("embedded-opentype"),
+    url("../fonts/Lato-Regular.woff2") format("woff2"),
+    url("../fonts/Lato-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -21,7 +27,9 @@ html {
 * {
   margin: 0;
   box-sizing: border-box;
-  font: 300 normal 16px/18px Lato, sans-serif;
+  font:
+    300 normal 16px/18px Lato,
+    sans-serif;
   color: rgba(0, 0, 0, 0.855);
 }
 
@@ -53,8 +61,6 @@ a {
   border: 1px solid rgb(96, 189, 221);
   padding: 0.5rem 1.5rem;
   border: none;
-  background-color: rgb(245, 188, 227);
-  color: rgba(0, 0, 0, 0.855);
   width: 16rem;
   font-size: 1.2rem;
   font-weight: bolder;
@@ -62,9 +68,6 @@ a {
   text-align: center;
   transition: all ease 0.5s;
   cursor: pointer;
-}
-.button:hover, .button:active {
-  background-color: rgba(245, 188, 227, 0.6);
 }
 @media all and (max-width: 950px) {
   .button {
@@ -78,6 +81,22 @@ a {
     font-size: 0.9rem;
     padding: 0.4rem 1rem;
   }
+}
+.button.light {
+  background-color: rgb(245, 188, 227);
+  color: rgba(0, 0, 0, 0.855);
+}
+.button.light:hover,
+.button.light:active {
+  background-color: rgba(245, 188, 227, 0.6);
+}
+.button.dark {
+  background-color: rgb(149, 47, 117);
+  color: rgba(255, 255, 255, 0.908);
+}
+.button.dark:hover,
+.button.dark:active {
+  background-color: rgba(149, 47, 117, 0.3);
 }
 
 .button_delete {
@@ -107,7 +126,12 @@ a {
   justify-content: center;
   align-items: center;
   gap: 2rem;
+}
+.notFound.light {
   background-color: rgb(213, 240, 249);
+}
+.notFound.dark {
+  background-color: rgb(91, 150, 170);
 }
 .notFound__404 {
   font-size: 4rem;
@@ -115,6 +139,14 @@ a {
 }
 .notFound__title {
   font-size: 1.5rem;
+}
+.notFound__404.light,
+.notFound__title.light {
+  color: rgba(0, 0, 0, 0.855);
+}
+.notFound__404.dark,
+.notFound__title.dark {
+  color: rgba(255, 255, 255, 0.908);
 }
 
 .contacts {
@@ -124,15 +156,32 @@ a {
   justify-content: center;
   align-items: center;
   gap: 2rem;
+}
+.contacts.light {
   background-color: rgb(213, 240, 249);
+}
+.contacts.dark {
+  background-color: rgb(91, 150, 170);
 }
 .contacts__title {
   font-size: 1.5rem;
+}
+.contacts__title.light {
+  color: rgba(0, 0, 0, 0.855);
+}
+.contacts__title.dark {
+  color: rgba(255, 255, 255, 0.908);
 }
 .contacts__link {
   font-size: 1.6rem;
   font-weight: 700;
   cursor: pointer;
+}
+.contacts__link.light {
+  color: rgb(149, 47, 117);
+}
+.contacts__link.dark {
+  color: rgb(245, 188, 227);
 }
 
 .header,
@@ -140,7 +189,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.header.light,
+.footer.light {
   background-color: rgb(96, 189, 221);
+}
+.header.dark,
+.footer.dark {
+  background-color: rgb(17, 81, 103);
 }
 
 .header__btns {
@@ -172,14 +228,20 @@ a {
     gap: 0.5rem;
   }
 }
-.logo p {
+.logo__title {
   font-size: 1.3rem;
   font-weight: bolder;
 }
 @media all and (max-width: 950px) {
-  .logo p {
+  .logo__title {
     font-size: 1rem;
   }
+}
+.logo__title.light {
+  color: rgba(0, 0, 0, 0.855);
+}
+.logo__title.dark {
+  color: rgba(255, 255, 255, 0.908);
 }
 .logo__img {
   width: 3rem;
@@ -192,7 +254,12 @@ a {
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
+}
+.main.light {
   background-color: rgb(213, 240, 249);
+}
+.main.dark {
+  background-color: rgb(91, 150, 170);
 }
 .main__title {
   text-align: center;
@@ -203,6 +270,12 @@ a {
   .main__title {
     font-size: 1.5rem;
   }
+}
+.main__title.light {
+  color: rgba(0, 0, 0, 0.855);
+}
+.main__title.dark {
+  color: rgba(255, 255, 255, 0.908);
 }
 .main__btns {
   align-self: stretch;
@@ -254,4 +327,10 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.card__text.light {
+  color: rgba(0, 0, 0, 0.855);
+}
+.card__text.dark {
+  color: rgba(255, 255, 255, 0.908);
 }

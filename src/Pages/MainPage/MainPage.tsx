@@ -4,11 +4,13 @@ import { RootState, AppDispatch, CardData } from "../../types";
 import { useGetCardsQuery } from "../../services/cardsApi";
 import { setCards, selectCards } from "../../store/cardsSlice";
 import { selectLikedCards, unlikeAll } from "../../store/likedSlice";
+import { selectTheme } from "../../store/themeSlice";
 import Card from "../../Components/Card/Card";
 import ShowLiked from "../../Components/ShowLiked/ShowLiked";
 import styles from "../../styles/index.module.scss";
 
 const MainPage: React.FC = () => {
+  const theme = useSelector<RootState, string>(selectTheme);
   const dispatch = useDispatch<AppDispatch>();
   const { data, error, isLoading, refetch } = useGetCardsQuery();
   const [showLiked, setShowLiked] = useState(false);
@@ -44,14 +46,17 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <div className={`${styles.content} ${styles.main} ${styles.theme}`}>
-      <h1 className={`${styles.main__title} ${styles.theme}`}>
+    <div className={`${styles.content} ${styles.main} ${styles[theme]}`}>
+      <h1 className={`${styles.main__title} ${styles[theme]}`}>
         Dish Categories
       </h1>
 
       <div className={styles.main__btns}>
         <ShowLiked showLiked={showLiked} handleShowLiked={handleShowLiked} />
-        <button className={styles.button} onClick={resetList}>
+        <button
+          className={`${styles.button} ${styles[theme]}`}
+          onClick={resetList}
+        >
           Reset List
         </button>
       </div>

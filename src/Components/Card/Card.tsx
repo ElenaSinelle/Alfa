@@ -6,6 +6,7 @@ import {
   selectLikedCards,
   deleteLikedCard,
 } from "../../store/likedSlice";
+import { selectTheme } from "../../store/themeSlice";
 import { CardProps, RootState } from "../../types";
 import { FaTimes, FaRegHeart, FaHeart } from "react-icons/fa";
 import styles from "../../styles/index.module.scss";
@@ -16,6 +17,7 @@ const Card: React.FC<CardProps> = ({
   strCategoryThumb,
   strCategoryDescription,
 }) => {
+  const theme = useSelector<RootState, string>(selectTheme);
   const dispatch = useDispatch();
   const likedCards = useSelector((state: RootState) => selectLikedCards(state));
   const isLiked = likedCards.includes(idCategory);
@@ -35,7 +37,9 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div className={styles.card}>
-      <div>Dish Category: {strCategory}</div>
+      <div className={`${styles.card__text} ${styles[theme]}`}>
+        Dish Category: {strCategory}
+      </div>
       <div>
         <img
           className={styles.card__img}
@@ -43,7 +47,9 @@ const Card: React.FC<CardProps> = ({
           alt={strCategory}
         />
       </div>
-      <div>Description: {strCategoryDescription.slice(0, 120)}...</div>
+      <div className={`${styles.card__text} ${styles[theme]}`}>
+        Description: {strCategoryDescription.slice(0, 120)}...
+      </div>
       <div className={styles.card__btns}>
         <button
           onClick={() => handleLike(idCategory)}
